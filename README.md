@@ -1,36 +1,87 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Stackwerkhaus
 
-## Getting Started
+A modern brutalist landing page for a fullstack web & app development company, built with Next.js (App Router), Tailwind CSS, and Tolgee for localization.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Overview
+
+**Stackwerkhaus** is a showcase landing page for a fullstack web and app developer, featuring:
+- **Modern brutalist design**: Bold, geometric, high-contrast, and unconventional UI.
+- **Localization**: English and German, powered by [Tolgee](https://tolgee.io/).
+- **Contact form**: Validated, styled, and ready for backend integration.
+- **Responsive**: Looks great on all devices.
+- **Tech stack**: Next.js (App Router), React, Tailwind CSS, Tolgee.
+
+---
+
+## 🖥️ Tech Stack
+
+- **Framework**: [Next.js](https://nextjs.org/) (App Router)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Localization**: [Tolgee](https://tolgee.io/)
+- **TypeScript**: For type safety
+
+---
+
+## 🌍 Localization
+
+- All visible text is localized using Tolgee.
+- Language switcher (EN/DE) in the top-right corner.
+- Translation files: `src/locales/en.json`, `src/locales/de.json`
+
+---
+
+## 📄 Project Structure
+
+```
+src/
+  app/
+    layout.tsx         # App root, TolgeeProvider, language switcher
+    page.tsx           # Landing page (hero + contact)
+    globals.css        # Tailwind and brutalist styles
+  components/
+    ContactForm.tsx    # Localized, validated contact form
+  locales/
+    en.json            # English translations
+    de.json            # German translations
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 1. Install dependencies
+```bash
+npm install
+```
 
-## Learn More
+### 2. Run the development server
+```bash
+npm run dev
+```
+Visit [http://localhost:3000](http://localhost:3000) to view the site.
 
-To learn more about Next.js, take a look at the following resources:
+### 3. Build for production
+```bash
+npm run build
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ✨ Customization
+- **Design**: Tweak Tailwind classes or add new brutalist elements in `globals.css`.
+- **Localization**: Add more languages by extending `src/locales` and updating the language switcher.
+- **Contact Form**: Integrate with your backend or email service as needed.
+- **Animations**: Placeholder for future hero section animations.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📬 Contact
+For inquiries, use the contact form on the landing page.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## License
+[MIT](LICENSE) — © Stackwerkhaus

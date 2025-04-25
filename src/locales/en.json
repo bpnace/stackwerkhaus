@@ -1,0 +1,12 @@
+{
+  "hero_title": "Stackwerkhaus",
+  "hero_subtitle": "Fullstack Web & App Development",
+  "hero_description": "We build robust, modern digital products with a brutalist edge.",
+  "contact_title": "Contact Us",
+  "contact_name": "Name",
+  "contact_email": "Email",
+  "contact_message": "Message",
+  "contact_submit": "Send Message",
+  "contact_success": "Thank you for reaching out! We'll get back to you soon.",
+  "contact_error": "Something went wrong. Please try again."
+} 

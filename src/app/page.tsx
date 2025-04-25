@@ -1,103 +1,82 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+import { I18nextProvider, useTranslation } from "react-i18next";
+import i18n from "./i18n";
+import ContactForm from "../components/ContactForm";
+import { GooeyText } from "../components/GooeyText";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [lang, setLang] = useState("en");
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  // Change language in i18next instance
+  const handleLangChange = (lng: string) => {
+    setLang(lng);
+    i18n.changeLanguage(lng);
+  };
+
+  return (
+    <I18nextProvider i18n={i18n}>
+      {/* Language Switcher */}
+      <div className="fixed top-4 right-4 z-50 flex gap-2">
+        <button
+          className={`px-3 py-1 border-2 border-black bg-white text-black font-bold ${lang === "en" ? "underline" : ""}`}
+          onClick={() => handleLangChange("en")}
+        >
+          EN
+        </button>
+        <button
+          className={`px-3 py-1 border-2 border-black bg-white text-black font-bold ${lang === "de" ? "underline" : ""}`}
+          onClick={() => handleLangChange("de")}
+        >
+          DE
+        </button>
+      </div>
+      <PageContent />
+    </I18nextProvider>
+  );
+}
+
+function PageContent() {
+  // const { t } = useTranslation(); // Not needed for static words
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-between bg-[#f7f7f7] text-black p-0">
+      {/* Hero Section */}
+      <section className="w-full min-h-screen flex flex-col bg-black text-white border-b-8 border-black p-0">
+        {/* Nav Bar */}
+        <nav className="w-full flex items-center justify-between px-8 py-6 border-b border-white/10">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-black font-extrabold text-xl">SWH</div>
+            <span className="ml-2 font-bold tracking-widest text-lg">Stackwerkhaus</span>
+          </div>
+          <ul className="flex gap-8 text-white font-mono text-base">
+            <li className="hover:underline cursor-pointer">Home</li>
+            <li className="hover:underline cursor-pointer">About</li>
+            <li className="hover:underline cursor-pointer">Contact</li>
+          </ul>
+        </nav>
+        {/* Hero Content */}
+        <div className="flex-1 flex flex-col items-center justify-center w-full">
+          <GooeyText
+            texts={["Develop", "Design", "Deploy", "STACKWERKHAUS"]}
+            className="w-full h-[120px] md:h-[180px] flex items-center justify-center"
+            textClassName="font-extrabold uppercase tracking-tight text-6xl md:text-8xl w-full text-center left-0 right-0 mx-auto"
+            cooldownTime={2}
+          />
+          <p className="max-w-xl text-lg sm:text-xl font-mono text-center mb-8 brutalist-shadow mt-24">
+            We build robust, modern digital products with a brutalist edge.
+          </p>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+      {/* Contact Section */}
+      <section className="w-full flex flex-col items-center justify-center py-16 px-4 bg-[#fff] border-t-8 border-black">
+        <h3 className="text-3xl font-extrabold mb-8 brutalist-shadow">
+          Contact Us
+        </h3>
+        <ContactForm />
+      </section>
     </div>
   );
 }
+
+// Tailwind brutalist shadow utility (add to globals.css or tailwind config if needed)
+// .brutalist-shadow { text-shadow: 2px 2px 0 #000, 4px 4px 0 #fff; }
