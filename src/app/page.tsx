@@ -4,33 +4,18 @@ import { I18nextProvider, useTranslation } from "react-i18next";
 import i18n from "./i18n";
 import ContactForm from "../components/ContactForm";
 import { GooeyText } from "../components/GooeyText";
+import { LanguageSwitcher } from "../components/LanguageSwitcher";
 
 export default function Home() {
-  const [lang, setLang] = useState("en");
-
-  // Change language in i18next instance
-  const handleLangChange = (lng: string) => {
-    setLang(lng);
-    i18n.changeLanguage(lng);
-  };
+  // const [lang, setLang] = useState("en");
+  // const handleLangChange = (lng: string) => {
+  //   setLang(lng);
+  //   i18n.changeLanguage(lng);
+  // };
 
   return (
     <I18nextProvider i18n={i18n}>
-      {/* Language Switcher */}
-      <div className="fixed top-4 right-4 z-50 flex gap-2">
-        <button
-          className={`px-3 py-1 border-2 border-black bg-white text-black font-bold ${lang === "en" ? "underline" : ""}`}
-          onClick={() => handleLangChange("en")}
-        >
-          EN
-        </button>
-        <button
-          className={`px-3 py-1 border-2 border-black bg-white text-black font-bold ${lang === "de" ? "underline" : ""}`}
-          onClick={() => handleLangChange("de")}
-        >
-          DE
-        </button>
-      </div>
+      {/* Removed obsolete language buttons */}
       <PageContent />
     </I18nextProvider>
   );
@@ -48,7 +33,8 @@ function PageContent() {
             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-black font-extrabold text-xl">SWH</div>
             <span className="ml-2 font-bold tracking-widest text-lg">Stackwerkhaus</span>
           </div>
-          <ul className="flex gap-8 text-white font-mono text-base">
+          <ul className="flex gap-8 text-white font-mono text-base items-center">
+            <li><LanguageSwitcher /></li>
             <li className="hover:underline cursor-pointer">Home</li>
             <li className="hover:underline cursor-pointer">About</li>
             <li className="hover:underline cursor-pointer">Contact</li>
@@ -60,7 +46,8 @@ function PageContent() {
             texts={["Develop", "Design", "Deploy", "STACKWERKHAUS"]}
             className="w-full h-[120px] md:h-[180px] flex items-center justify-center"
             textClassName="font-extrabold uppercase tracking-tight text-6xl md:text-8xl w-full text-center left-0 right-0 mx-auto"
-            cooldownTime={2}
+            morphTime={1.5}
+            cooldownTime={1}
           />
           <p className="max-w-xl text-lg sm:text-xl font-mono text-center mb-8 brutalist-shadow mt-24">
             We build robust, modern digital products with a brutalist edge.

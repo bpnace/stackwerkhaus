@@ -22,6 +22,7 @@ export function GooeyText({
   const [fraction, setFraction] = React.useState(0);
   const requestRef = React.useRef<number>();
   const lastTimeRef = React.useRef<number>(0);
+  const elapsedRef = React.useRef<number>(0);
 
   React.useEffect(() => {
     let running = true;
@@ -30,27 +31,27 @@ export function GooeyText({
       if (!lastTimeRef.current) lastTimeRef.current = now;
       const dt = (now - lastTimeRef.current) / 1000;
       lastTimeRef.current = now;
+      elapsedRef.current += dt;
 
       if (phase === 'morph') {
-        setFraction(prev => {
-          const next = prev + dt / morphTime;
-          if (next >= 1) {
-            setPhase('hold');
-            setFraction(1);
-            lastTimeRef.current = now;
-            return 1;
-          }
-          return next;
-        });
+        let frac = elapsedRef.current / morphTime;
+        if (frac >= 1) {
+          frac = 1;
+          setFraction(1);
+          setPhase('hold');
+          elapsedRef.current = 0;
+        } else {
+          setFraction(frac);
+        }
       } else if (phase === 'hold') {
         setFraction(1);
-        setTimeout(() => {
+        if (elapsedRef.current >= cooldownTime) {
           setPhase('morph');
           setFromIdx((prev) => (prev + 1) % texts.length);
           setToIdx((prev) => (prev + 1) % texts.length);
           setFraction(0);
-          lastTimeRef.current = performance.now();
-        }, cooldownTime * 1000);
+          elapsedRef.current = 0;
+        }
       }
       requestRef.current = requestAnimationFrame(animate);
     }
@@ -58,6 +59,8 @@ export function GooeyText({
     return () => {
       running = false;
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
+      lastTimeRef.current = 0;
+      elapsedRef.current = 0;
     };
   }, [phase, morphTime, cooldownTime, texts.length]);
 
