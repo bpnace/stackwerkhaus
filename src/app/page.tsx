@@ -26,9 +26,19 @@ function PageContent() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-between bg-[#f7f7f7] text-black p-0">
       {/* Hero Section */}
-      <section className="w-full min-h-screen flex flex-col bg-black text-white border-b-8 border-black p-0">
+      <section
+        className="w-full min-h-screen flex flex-col bg-black text-white border-b-8 border-black p-0 relative overflow-hidden"
+        style={{
+          backgroundImage: "url('/background2.png')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         {/* Nav Bar */}
-        <nav className="w-full flex items-center justify-between px-8 py-6 border-b border-white/10">
+        <nav className="w-full flex items-center justify-between px-8 py-6 border-b border-white/10"
+          style={{ position: 'relative', zIndex: 1 }}
+        >
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-black font-extrabold text-xl">SWH</div>
             <span className="ml-2 font-bold tracking-widest text-lg">Stackwerkhaus</span>
@@ -41,7 +51,9 @@ function PageContent() {
           </ul>
         </nav>
         {/* Hero Content */}
-        <div className="flex-1 flex flex-col items-center justify-center w-full">
+        <div className="flex-1 flex flex-col items-center justify-center w-full"
+          style={{ position: 'relative', zIndex: 1 }}
+        >
           <GooeyText
             texts={["Develop", "Design", "Deploy", "STACKWERKHAUS"]}
             className="w-full h-[120px] md:h-[180px] flex items-center justify-center"
@@ -49,9 +61,6 @@ function PageContent() {
             morphTime={1.5}
             cooldownTime={1}
           />
-          <p className="max-w-xl text-lg sm:text-xl font-mono text-center mb-8 brutalist-shadow mt-24">
-            We build robust, modern digital products with a brutalist edge.
-          </p>
         </div>
       </section>
       {/* Contact Section */}
