@@ -20,7 +20,7 @@ export function GooeyText({
   const [fromIdx, setFromIdx] = React.useState(0);
   const [toIdx, setToIdx] = React.useState(1);
   const [fraction, setFraction] = React.useState(0);
-  const requestRef = React.useRef<number>();
+  const requestRef = React.useRef<number>(0);
   const lastTimeRef = React.useRef<number>(0);
   const elapsedRef = React.useRef<number>(0);
 
@@ -100,7 +100,7 @@ export function GooeyText({
         </defs>
       </svg>
       <div
-        className="flex items-center justify-center"
+        className="flex items-center justify-center relative w-full"
         style={{ filter: "url(#threshold)" }}
       >
         <span

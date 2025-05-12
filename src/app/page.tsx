@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
-import { I18nextProvider, useTranslation } from "react-i18next";
-import i18n from "./i18n";
+import { TolgeeProvider, tolgee } from "./i18n";
 import ContactForm from "../components/ContactForm";
 import { GooeyText } from "../components/GooeyText";
 import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { T } from "@tolgee/react";
+import { PortfolioHighlights, Project } from "../components/PortfolioHighlights";
 
 export default function Home() {
   // const [lang, setLang] = useState("en");
@@ -14,15 +14,45 @@ export default function Home() {
   // };
 
   return (
-    <I18nextProvider i18n={i18n}>
+    <TolgeeProvider tolgee={tolgee} fallback="Loading...">
       {/* Removed obsolete language buttons */}
       <PageContent />
-    </I18nextProvider>
+    </TolgeeProvider>
   );
 }
 
 function PageContent() {
   // const { t } = useTranslation(); // Not needed for static words
+  const projects: Project[] = [
+    {
+      title: "E-Commerce Platform",
+      image: "/projects/ecommerce.png",
+      description: "A scalable, modern e-commerce solution for SMBs.",
+      tech: ["Next.js", "Stripe", "Tailwind"],
+      link: "#"
+    },
+    {
+      title: "Portfolio Website",
+      image: "/projects/portfolio.png",
+      description: "A personal portfolio with brutalist design and localization.",
+      tech: ["React", "Tolgee", "Vercel"],
+      link: "#"
+    },
+    {
+      title: "SaaS Dashboard",
+      image: "/projects/saas.png",
+      description: "A dashboard for SaaS analytics and user management.",
+      tech: ["TypeScript", "Node.js", "Prisma"],
+      link: "#"
+    },
+    {
+      title: "Mobile App UI Kit",
+      image: "/projects/mobile.png",
+      description: "A cross-platform UI kit for rapid mobile app prototyping.",
+      tech: ["Expo", "React Native", "Figma"],
+      link: "#"
+    }
+  ];
   return (
     <div className="min-h-screen flex flex-col items-center justify-between bg-[#f7f7f7] text-black p-0">
       {/* Hero Section */}
@@ -40,14 +70,13 @@ function PageContent() {
           style={{ position: 'relative', zIndex: 1 }}
         >
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-black font-extrabold text-xl">SWH</div>
-            <span className="ml-2 font-bold tracking-widest text-lg">Stackwerkhaus</span>
+            <img src="/logo2.svg" alt="Stackwerkhaus Logo" className="w-100 h-10 object-contain text-white" />
           </div>
           <ul className="flex gap-8 text-white font-mono text-base items-center">
             <li><LanguageSwitcher /></li>
-            <li className="hover:underline cursor-pointer">Home</li>
-            <li className="hover:underline cursor-pointer">About</li>
-            <li className="hover:underline cursor-pointer">Contact</li>
+            <li className="hover:underline cursor-pointer"><T keyName="home" defaultValue="Home" /></li>
+            <li className="hover:underline cursor-pointer"><T keyName="about" defaultValue="About" /></li>
+            <li><a href="#contact" className="hover:underline cursor-pointer"><T keyName="contact_title" defaultValue="Contact" /></a></li>
           </ul>
         </nav>
         {/* Hero Content */}
@@ -63,10 +92,12 @@ function PageContent() {
           />
         </div>
       </section>
+      {/* Portfolio Section */}
+      <PortfolioHighlights projects={projects} />
       {/* Contact Section */}
-      <section className="w-full flex flex-col items-center justify-center py-16 px-4 bg-[#fff] border-t-8 border-black">
+      <section id="contact" className="w-full flex flex-col items-center justify-center py-16 px-4 bg-[#fff] border-t-8 border-black">
         <h3 className="text-3xl font-extrabold mb-8 brutalist-shadow">
-          Contact Us
+          <T keyName="contact_title" />
         </h3>
         <ContactForm />
       </section>

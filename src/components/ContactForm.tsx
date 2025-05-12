@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslate } from "@tolgee/react";
 
 export default function ContactForm() {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
@@ -19,7 +19,9 @@ export default function ContactForm() {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm({ ...form, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: undefined });
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { [e.target.name]: _removed, ...rest } = errors;
+    setErrors(rest);
   }
 
   function handleSubmit(e: React.FormEvent) {

@@ -1,20 +1,16 @@
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
-import en from '../locales/en.json';
-import de from '../locales/de.json';
+import { Tolgee, DevTools, TolgeeProvider, FormatSimple } from "@tolgee/react";
 
-i18n
-  .use(initReactI18next)
+const tolgee = Tolgee()
+  .use(DevTools())
+  .use(FormatSimple())
   .init({
-    resources: {
-      en: { translation: en },
-      de: { translation: de },
-    },
-    lng: 'en',
-    fallbackLng: 'en',
-    interpolation: {
-      escapeValue: false,
+    language: 'de', // default to German as per previous request
+    apiUrl: process.env.NEXT_PUBLIC_TOLGEE_API_URL || 'https://app.tolgee.io',
+    apiKey: process.env.NEXT_PUBLIC_TOLGEE_API_KEY,
+    staticData: {
+      en: () => import('../locales/en.json').then((m) => m.default),
+      de: () => import('../locales/de.json').then((m) => m.default),
     },
   });
 
-export default i18n; 
+export { TolgeeProvider, tolgee }; 

@@ -29,3 +29,15 @@ body {
 .brutalist-shadow {
   text-shadow: 2px 2px 0 #000, 4px 4px 0 #fff;
 }
+
+@font-face {
+  font-family: 'Turtle Mode Condensed';
+  src: url('/fonts/turtle_mode/turtlemodecond.ttf') format('truetype');
+  font-weight: 150;
+  font-style: normal;
+  font-display: swap;
+}
+
+html {
+  scroll-behavior: smooth;
+}

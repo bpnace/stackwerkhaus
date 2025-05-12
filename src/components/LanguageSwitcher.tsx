@@ -1,6 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { useTolgee } from "@tolgee/react";
 
 const LANGS = [
   { code: "en", label: "EN" },
@@ -8,9 +8,9 @@ const LANGS = [
 ];
 
 export function LanguageSwitcher() {
-  const { i18n } = useTranslation();
+  const tolgee = useTolgee(['language']);
   const [open, setOpen] = useState(false);
-  const current = LANGS.find(l => l.code === i18n.language) || LANGS[0];
+  const current = LANGS.find(l => l.code === tolgee.getLanguage()) || LANGS[0];
   const other = LANGS.filter(l => l.code !== current.code);
   const btnRef = useRef<HTMLButtonElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -33,10 +33,10 @@ export function LanguageSwitcher() {
   }, [open]);
 
   return (
-    <div className="relative inline-block mr-4">
+    <div className="relative inline-block">
       <button
         ref={btnRef}
-        className="w-10 h-10 rounded-full bg-white text-black font-bold flex items-center justify-center border-2 border-black hover:bg-gray-100 transition"
+        className="w-10 h-10 rounded-full bg-white text-black font-bold flex items-center justify-center border-2 border-black hover:bg-gray-100 transition mr-4"
         onClick={() => setOpen(o => !o)}
         aria-label="Change language"
       >
@@ -45,14 +45,14 @@ export function LanguageSwitcher() {
       {open && (
         <div
           ref={dropdownRef}
-          className="absolute left-0 mt-2 w-20 rounded-lg shadow-lg bg-white border border-black z-50"
+          className="absolute left-0 mt-2 min-w-full rounded-lg shadow-lg bg-white border border-black z-50"
         >
           {other.map(lang => (
             <button
               key={lang.code}
-              className="w-full px-4 py-2 text-black hover:bg-gray-200 text-center font-bold rounded-lg"
+              className="w-full h-10 text-black hover:bg-gray-200 text-center font-bold rounded-lg flex items-center justify-center"
               onClick={() => {
-                i18n.changeLanguage(lang.code);
+                tolgee.changeLanguage(lang.code);
                 setOpen(false);
               }}
             >
